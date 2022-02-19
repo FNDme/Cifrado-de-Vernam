@@ -14,9 +14,7 @@ python GUI.py
 ## Vista previa
 
 <img src="img/Preview_1.png" alt="imagen de la aplicación vacia" width="250"/>
-<br\>
 <img src="img/Preview_2.png" alt="imagen de la aplicación cifrando" width="250"/>
-<br\>
 <img src="img/Preview_3.png" alt="imagen de la aplicación descifrando" width="250"/>
 
 ## Contribuir
