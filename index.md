@@ -1,4 +1,3 @@
-<br>
 # Cifrado de Vernam
 
 El cifrado de Vernam se basa en la sustitución polialfabetica mediante una clave generada de una forma aleatoria. Como la generación aleatoria sigue siendo, a dia de hoy, uno de los problemas informáticos que no hemos sido capaces de solventar, en este caso, se trata de una generación pseudoaleatoria basada en smillas.
