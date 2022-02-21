@@ -40,13 +40,13 @@ def decrypt(cipher):
             plain += str(int(cripted_bin[i]) ^ 1)
     return bin_to_txt(plain)
 
-def read_file(filename):
-    with open(filename, 'r') as f:
-        return f.read()
+# def read_file(filename):
+#     with open(filename, 'r') as f:
+#         return f.read()
 
-def write_file(filename, txt):
-    with open(filename, 'w') as f:
-        f.write(txt)
+# def write_file(filename, txt):
+#     with open(filename, 'w') as f:
+#         f.write(txt)
 
 
 # def menu():
