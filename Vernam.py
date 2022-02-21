@@ -14,11 +14,14 @@ def keygen(length):
         key += str(temp)
     return key
 
-def encrypt(txt):
+def encrypt(txt, key = None):
     bin_txt = txt_to_bin(txt)
     temp = dict()
     temp['cripted_bin'] = ""
-    temp['key_bin'] = keygen(len(bin_txt))
+    if key == None:
+        temp['key_bin'] = keygen(len(bin_txt))
+    else:
+        temp['key_bin'] = txt_to_bin(key)
     for i in range(len(bin_txt)):
         if temp['key_bin'][i] == '0':
             temp['cripted_bin'] += bin_txt[i]

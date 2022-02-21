@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 from Vernam import *
 
 base = Tk()
@@ -12,8 +13,21 @@ base.configure(background='#232426')
 Canva = Canvas(base, width=500, height=65, bg='#2a2b2d', highlightthickness=0)
 Canva.place(x=0, y=335)
 
+sz = StringVar()
+sz.set("Bin size: 0")
+
 def gui_encrypt():
-    temp = encrypt(inputText.get('1.0', END).rstrip("\n"))
+
+    if auto.get():
+        temp = encrypt(inputText.get('1.0', END).rstrip("\n"))
+    else:
+        if len(txt_to_bin(keyText.get('1.0', END).rstrip("\n"))) != len(txt_to_bin(inputText.get('1.0', END).rstrip("\n"))):
+            messagebox.showerror('Error', 'key size and input size must be equal')
+            return
+        else:
+            temp = encrypt(inputText.get('1.0', END).rstrip("\n"), keyText.get('1.0', END).rstrip("\n"))
+
+    sz.set("Bin size: " + str(len(temp['cripted_bin'])))
 
     outputText.config(state=NORMAL)
     outputText.delete('1.0', END)
@@ -44,6 +58,8 @@ def gui_decrypt():
     temp = dict()
     temp['cripted_ascii'] = (inputText.get('1.0', END).rstrip("\n"))
     temp['key_ascii'] = (keyText.get('1.0', END).rstrip("\n"))
+
+    sz.set("Bin size: " + str(len(txt_to_bin(temp['cripted_ascii']))))
 
     inputTextBin.config(state=NORMAL)
     inputTextBin.delete('1.0', END)
@@ -114,6 +130,10 @@ outputTextBinLabel = Label(base, text='Output Text (Bin)')
 outputTextBinLabel.place(x=280, y=230)
 outputTextBinLabel.configure(background='#232426', foreground='#BFBFBD')
 
+sizeLabel = Label(base, textvariable=sz)
+sizeLabel.place(x=230, y=360)
+sizeLabel.configure(background='#2a2b2d', foreground='#BFBFBD')
+
 inputText = Text(base, width=25, height=3)
 inputText.place(x=20, y=60)
 inputText.configure(background='#04BF68', foreground='#232426', borderwidth=0)
@@ -150,5 +170,14 @@ Clear = Button(base, text='Clear', command=lambda: clear())
 Clear.place(x=410, y=355)
 Clear.configure(background='#04BF68', foreground='#155939', borderwidth=0, activebackground='#232426', pady=5, padx=10)
 
+auto = BooleanVar()
+
+on = Radiobutton(base, text='Auto', variable=auto, value=1)
+on.place(x=320, y=345)
+on.configure(background='#2a2b2d', foreground='#BFBFBF', activebackground='#232426', activeforeground='#BFBFBF', selectcolor='#232426')
+
+off = Radiobutton(base, text='Manual', variable=auto, value=0)
+off.place(x=320, y=370)
+off.configure(background='#2a2b2d', foreground='#BFBFBF', activebackground='#232426', activeforeground='#BFBFBF', selectcolor='#232426')
 
 base.mainloop()
