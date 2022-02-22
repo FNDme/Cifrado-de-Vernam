@@ -1,10 +1,5 @@
 import random
-
-def txt_to_bin(txt):
-    return ''.join('{0:08b}'.format(ord(x), 'b') for x in txt)
-
-def bin_to_txt(bin):
-    return ''.join(chr(int(bin[i:i+8], 2)) for i in range(0, len(bin), 8))
+from conversor import txt_to_bin, bin_to_txt
 
 def keygen(length):
     random.seed()
