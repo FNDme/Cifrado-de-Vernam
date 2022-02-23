@@ -64,35 +64,36 @@ def main():
                 cipher = encrypt(txt, key)
             else:
                 cipher = encrypt(txt)
-            print("Entrada:")
-            print("\tMensaje original: \t" + txt)
+            print("\nEntrada:")
+            print("\tMensaje original: \t\t" + txt)
             print("Salida:")
             print("\tMensaje original en binario: \t" + txt_to_bin(txt))
             print("\tLongitud del mensaje binario: \t" + str(len(txt_to_bin(txt))))
             print("Entrada:")
-            print("\tClave: \t" + cipher['key_ascii'])
-            print("\tClave en binario: \t" + cipher['key_bin'])
+            print("\tClave: \t\t\t\t" + cipher['key_ascii'])
+            print("\tClave en binario: \t\t" + cipher['key_bin'])
             print("Salida:")
             print("\tMensaje cifrado en binario: \t" + cipher['cripted_bin'])
-            print("\tMensaje cifrado: \t" + cipher['cripted_ascii'])
-        if choice == 2:
+            print("\tMensaje cifrado: \t\t" + cipher['cripted_ascii'])
+        elif choice == 2:
             cipher["cripted_ascii"] = input("Enter the text to decrypt: ")
             cipher["key_ascii"] = input("Enter the key: ")
-            print("Entrada:")
-            print("\tMensaje cifrado: \t" + cipher['cripted_ascii'])
+            print("\nEntrada:")
+            print("\tMensaje cifrado: \t\t" + cipher['cripted_ascii'])
             print("Salida:")
             print("\tMensaje cifrado en binario: \t" + txt_to_bin(cipher['cripted_ascii']))
             print("\tLongitud del mensaje binario: \t" + str(len(txt_to_bin(cipher['cripted_ascii']))))
             print("Entrada:")
-            print("\tClave: \t" + cipher['key_ascii'])
-            print("\tClave en binario: \t" + txt_to_bin(cipher['key_ascii']))
+            print("\tClave: \t\t\t\t" + cipher['key_ascii'])
+            print("\tClave en binario: \t\t" + txt_to_bin(cipher['key_ascii']))
             print("Salida:")
             print("\tMensaje original: \t" + decrypt(cipher))
-            print("\tMensaje original en binario: \t" + txt_to_bin(cipher['cripted_bin']))
+            print("\tMensaje original en binario: \t" + txt_to_bin(cipher['cripted_ascii']))
 
 
-        if choice == 3:
+        elif choice == 3:
             break
+
         else:
             print("Invalid choice")
     
