@@ -1,5 +1,4 @@
 import random
-from conversor import txt_to_bin, bin_to_txt
 
 def keygen(length):
     random.seed()
@@ -38,87 +37,65 @@ def decrypt(cipher):
             plain += str(int(cripted_bin[i]) ^ 1)
     return bin_to_txt(plain)
 
-# def read_file(filename):
-#     with open(filename, 'r') as f:
-#         return f.read()
+def txt_to_bin(txt):
+    return ''.join('{0:08b}'.format(ord(x), 'b') for x in txt)
 
-# def write_file(filename, txt):
-#     with open(filename, 'w') as f:
-#         f.write(txt)
+def bin_to_txt(bin):
+    return ''.join(chr(int(bin[i:i+8], 2)) for i in range(0, len(bin), 8))
 
 
-# def menu():
-#     print("""
-#     1. Encrypt
-#     2. Decrypt
-#     3. Exit
-#     """)
-#     choice = int(input("Enter your choice: "))
-#     return choice
+def menu():
+    print("""
+    1. Encrypt
+    2. Decrypt
+    3. Exit
+    """)
+    choice = int(input("Enter your choice: "))
+    return choice
 
-# def work_with_files():
-#     print("""
-#     1. Files
-#     2. Text
-#     3. Exit
-#     """)
-#     choice = int(input("Enter your choice: "))
-#     return choice
+def main():
+    while True:
+        choice = menu()
+        if choice == 1:
+            txt = input("Enter a text: ")
+            needkey = input("Do you have a key? (y/n) ")
+            if needkey == 'y' or needkey == 'Y' or needkey == 'yes' or needkey == 'Yes' or needkey == 'YES':
+                key = input("Enter the key: ")
+                cipher = encrypt(txt, key)
+            else:
+                cipher = encrypt(txt)
+            print("Entrada:")
+            print("\tMensaje original: \t" + txt)
+            print("Salida:")
+            print("\tMensaje original en binario: \t" + txt_to_bin(txt))
+            print("\tLongitud del mensaje binario: \t" + str(len(txt_to_bin(txt))))
+            print("Entrada:")
+            print("\tClave: \t" + cipher['key_ascii'])
+            print("\tClave en binario: \t" + cipher['key_bin'])
+            print("Salida:")
+            print("\tMensaje cifrado en binario: \t" + cipher['cripted_bin'])
+            print("\tMensaje cifrado: \t" + cipher['cripted_ascii'])
+        if choice == 2:
+            cipher["cripted_ascii"] = input("Enter the text to decrypt: ")
+            cipher["key_ascii"] = input("Enter the key: ")
+            print("Entrada:")
+            print("\tMensaje cifrado: \t" + cipher['cripted_ascii'])
+            print("Salida:")
+            print("\tMensaje cifrado en binario: \t" + txt_to_bin(cipher['cripted_ascii']))
+            print("\tLongitud del mensaje binario: \t" + str(len(txt_to_bin(cipher['cripted_ascii']))))
+            print("Entrada:")
+            print("\tClave: \t" + cipher['key_ascii'])
+            print("\tClave en binario: \t" + txt_to_bin(cipher['key_ascii']))
+            print("Salida:")
+            print("\tMensaje original: \t" + decrypt(cipher))
+            print("\tMensaje original en binario: \t" + txt_to_bin(cipher['cripted_bin']))
 
-# def main():
-#     while True:
-#         files = work_with_files()
-#         if files == 3:
-#             break
-#         elif files != 1 and files != 2:
-#             print("Invalid choice")
-#         else:
-#             while(True):
-#                 choice = menu()
-#                 if choice == 1:
-#                     if files == 1:
-#                         file = input("Enter the file name: ")
-#                         with open(file, 'r') as f:
-#                             txt = f.read()
-#                         txt = txt.replace("\n", "")
-#                         cipher = encrypt(txt)
-#                     else:
-#                         txt = input("Enter text: ")
-#                         cipher = encrypt(txt)
-#                     print("Cipher (bin): ", cipher['cripted'])
-#                     print("Cipher (text): ", bin_to_txt(cipher['cripted']))
-#                     print("Key: ", cipher['key'])
-#                     print("Do you want to save cipher text to file? (y/n)")
-#                     save = input()
-#                     if save == 'y' or save == 'Y' or save == 'yes' or save == 'Yes' or save == 'YES':
-#                         with open("cipher.txt", 'w') as f:
-#                             f.write(cipher['cripted'])
-#                         with open("key.txt", 'w') as f:
-#                             f.write(cipher['key'])
-#                     else:
-#                         print("not saved")
-#                 elif choice == 2:
-#                     cipher = dict()
-#                     if files == 1:
-#                         file = input("Enter the file name: ")
-#                         with open(file, 'r') as f:
-#                             cipher['cripted'] = f.read()
-#                         print("Is the key in a file? (y/n)")
-#                         fileKey = input()
-#                         if fileKey == 'y' or fileKey == 'Y' or fileKey == 'yes' or fileKey == 'Yes' or fileKey == 'YES':
-#                             file = input("Enter the file name: ")
-#                             with open(file, 'r') as f:
-#                                 cipher['key'] = f.read()
-#                         else:
-#                             cipher['key'] = input("Enter the key: ")
-#                     else:
-#                         cipher['cripted'] = input("Enter cipher: ")
-#                         cipher['key'] = input("Enter key: ")
-#                     print("decription: ", bin_to_txt(decrypt(cipher)))
-#                 elif choice == 3:
-#                     break
-#                 else:
-#                     print("Invalid input")
-#             break
 
-# main()        
+        if choice == 3:
+            break
+        else:
+            print("Invalid choice")
+    
+
+if __name__ == "__main__":
+    main()
