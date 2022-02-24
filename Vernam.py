@@ -26,12 +26,12 @@ def encrypt(txt, key = None):
     return temp
     
 
-def decrypt(cipher):
-    cripted_bin = txt_to_bin(cipher['cripted_ascii'])
-    key = txt_to_bin(cipher['key_ascii'])
+def decrypt(txt, key):
+    cripted_bin = txt_to_bin(txt)
+    key_bin = txt_to_bin(key)
     plain = ""
     for i in range(len(cripted_bin)):
-        if key[i] == '0':
+        if key_bin[i] == '0':
             plain += cripted_bin[i]
         else:
             plain += str(int(cripted_bin[i]) ^ 1)
@@ -76,19 +76,20 @@ def main():
             print("\tMensaje cifrado en binario: \t" + cipher['cripted_bin'])
             print("\tMensaje cifrado: \t\t" + cipher['cripted_ascii'])
         elif choice == 2:
-            cipher["cripted_ascii"] = input("Enter the text to decrypt: ")
-            cipher["key_ascii"] = input("Enter the key: ")
+            txt = input("Enter the text to decrypt: ")
+            key = input("Enter the key: ")
             print("\nEntrada:")
-            print("\tMensaje cifrado: \t\t" + cipher['cripted_ascii'])
+            print("\tMensaje cifrado: \t\t" + txt)
             print("Salida:")
-            print("\tMensaje cifrado en binario: \t" + txt_to_bin(cipher['cripted_ascii']))
-            print("\tLongitud del mensaje binario: \t" + str(len(txt_to_bin(cipher['cripted_ascii']))))
+            print("\tMensaje cifrado en binario: \t" + txt_to_bin(txt))
+            print("\tLongitud del mensaje binario: \t" + str(len(txt_to_bin(txt))))
             print("Entrada:")
-            print("\tClave: \t\t\t\t" + cipher['key_ascii'])
-            print("\tClave en binario: \t\t" + txt_to_bin(cipher['key_ascii']))
+            print("\tClave: \t\t\t\t" + key)
+            print("\tClave en binario: \t\t" + txt_to_bin(key))
             print("Salida:")
-            print("\tMensaje original: \t" + decrypt(cipher))
-            print("\tMensaje original en binario: \t" + txt_to_bin(cipher['cripted_ascii']))
+            plain = decrypt(txt, key)
+            print("\tMensaje original: \t" + plain)
+            print("\tMensaje original en binario: \t" + txt_to_bin(plain))
 
 
         elif choice == 3:

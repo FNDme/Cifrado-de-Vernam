@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
-from Vernam import *
+from Vernam_test import *
 
 base = Tk()
 
@@ -55,23 +55,22 @@ def gui_encrypt():
     return
 
 def gui_decrypt():
-    temp = dict()
-    temp['cripted_ascii'] = (inputText.get('1.0', END).rstrip("\n"))
-    temp['key_ascii'] = (keyText.get('1.0', END).rstrip("\n"))
+    temp_txt = (inputText.get('1.0', END).rstrip("\n"))
+    temp_key = (keyText.get('1.0', END).rstrip("\n"))
 
-    sz.set("Bin size: " + str(len(txt_to_bin(temp['cripted_ascii']))))
+    sz.set("Bin size: " + str(len(txt_to_bin(temp_txt))))
 
     inputTextBin.config(state=NORMAL)
     inputTextBin.delete('1.0', END)
-    inputTextBin.insert('1.0', txt_to_bin(temp['cripted_ascii']))
+    inputTextBin.insert('1.0', txt_to_bin(temp_txt))
     inputTextBin.config(state=DISABLED)
 
     keyTextBin.config(state=NORMAL)
     keyTextBin.delete('1.0', END)
-    keyTextBin.insert('1.0', txt_to_bin(temp['key_ascii']))
+    keyTextBin.insert('1.0', txt_to_bin(temp_key))
     keyTextBin.config(state=DISABLED)
 
-    decrypted = decrypt(temp)
+    decrypted = decrypt(temp_txt, temp_key)
 
     outputText.config(state=NORMAL)
     outputText.delete('1.0', END)
