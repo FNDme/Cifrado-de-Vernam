@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
-from Vernam_test import *
+from Vernam import *
 
 base = Tk()
 
